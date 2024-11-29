@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: bisque;
+    padding: 50px;
+    color: hotpink;
+    line-height: 1.6;
+}
+header {
+    background: floralwhite;
+    padding: 1rem 0;
+    text-align: center;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: crimson;
+}
+form {
+    margin-top: 1rem;
+}
