@@ -1,28 +1,101 @@
+/* Reset and Base Styles */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    background-color: bisque;
-    padding: 50px;
-    color: hotpink;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 }
+
+/* Container Styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    padding: 0 1rem;
+}
+
+/* Title Styling */
 header {
-    background: floralwhite;
-    padding: 1rem 0;
+    width: 100%;
     text-align: center;
+    position: fixed; /* Stick at the top */
+    top: 0;
+    background-color: #f9f9f9;
+    z-index: 10;
+    padding: 1rem 0;
 }
-nav ul {
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Search Bar Styling */
+.search-bar {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 4rem; /* Push it below the fixed title */
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Results Container */
+.results-container {
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    overflow-y: scroll; /* Always show the scroll bar */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    margin-top: 1rem;
+}
+
+/* Results List */
+.results-container ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
-nav ul li {
-    display: inline;
-    margin: 0 10px;
+
+.results-container li {
+    padding: 0.5rem;
+    border-bottom: 1px solid #eaeaea;
 }
-nav ul li a {
+
+.results-container li:last-child {
+    border-bottom: none;
+}
+
+/* Footer Links */
+footer {
+    width: 100%;
+    position: fixed; /* Stick at the bottom */
+    bottom: 0;
+    background-color: #f9f9f9;
+    padding: 1rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-around; /* Space out links */
+    z-index: 10;
+}
+
+footer a {
     text-decoration: none;
-    color: crimson;
+    color: #007bff;
+    font-size: 0.9rem;
 }
-form {
-    margin-top: 1rem;
+
+footer a:hover {
+    text-decoration: underline;
 }
