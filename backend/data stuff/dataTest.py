@@ -12,23 +12,27 @@ def load_csv_file(file_path):
     data.dropna(subset=["perfume"], inplace=True)
     data["notes"] = data["notes"].str.split(", ")
     perfume_data = data[["brand", "perfume", "notes"]].values.tolist()
+    data["notes"] = data["notes"].str.split(", ")
+    # for testing whether notes are split up accurately
     return perfume_data
 
 
-# Get basic information
-print(data.info())  # Column names, data types, missing values
-print(data.head())  # First 5 rows
-print(data.describe())  # Summary statistics (numerical columns)
-x
-# dropping data that doesn't have value (3 perfume names not included)
+perfumeData = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
+print(perfumeData)
 
+#
+# # # Get basic information
+# # print(data.info())  # Column names, data types, missing values
+# # print(data.head())  # First 5 rows
+# # print(data.describe())  # Summary statistics (numerical columns)
+#
+# data["notes"] = data["notes"].str.split(", ")
+#
+# # for testing whether notes are split up accurately
+# print(data["notes"].head())
+# print(data.loc[7000, "notes"])  # Replace 0 with any row index
+#
+# # testing failed rows
+# # failed_rows = data[data["notes"].apply(type) != list]
+# # print(failed_rows)
 
-data["notes"] = data["notes"].str.split(", ")
-
-# for testing whether notes are split up accurately
-print(data["notes"].head())
-print(data.loc[7000, "notes"])  # Replace 0 with any row index
-
-# testing failed rows
-# failed_rows = data[data["notes"].apply(type) != list]
-# print(failed_rows)
