@@ -16,4 +16,4 @@ for _ in range(17,000):
 
 # Convert to DataFrame and save
 new_df = pd.DataFrame(new_data)
-new_df.to_csv('synthetic_fragrances.csv', index=False)
+new_df.to_csv('perfumes_table.csv', index=False)
