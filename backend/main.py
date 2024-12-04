@@ -98,7 +98,7 @@ def main():
                     print("Not a valid input. Please start over.")
                     continue
                 
-        elif initialInput == "3":
+        elif initialInput == "2":
             print("Thank you for using Fragrance Note Finder! Goodbye.")
             running = False
             break
