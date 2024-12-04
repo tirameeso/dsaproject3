@@ -1,4 +1,5 @@
 from mergesort import mergeSort
+from hashtable import *
 import pandas as pd
 import time
 
@@ -17,20 +18,18 @@ def searchEng(frag, notes):
     Search for perfumes that match ALL the given notes.
 
     Args:
-    frag (list): The list of all perfumes.
-    notes (list): The list of notes to search for.
+    frag (list): list of all perfumes
+    notes (list): list of notes to search for
 
     Returns:
     list: A list of perfumes that match all the notes.
     """
     matchingPerfumes = []
-
     for f in frag:
         perfumeNotes = [n.lower() for n in f[2]]  # Convert notes to lowercase
         # Check if all search notes are in the perfume's notes
         if all(note in perfumeNotes for note in notes):
             matchingPerfumes.append(f)
-
     return matchingPerfumes
 
 
@@ -71,11 +70,9 @@ def main():
                     # compute time it took
                     totalTime = endTime - startTime
                     print(f"Merge sort completed in {totalTime:.6f} seconds.")
-
                 elif DSAoptionInput ==  "h":
                     # implementation for hash table search
                     print("work in progress")
-
                 else:
                     print("Not a valid input. Please start over.")
                     continue
