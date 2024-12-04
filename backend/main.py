@@ -52,7 +52,7 @@ def main():
     print("⊹₊ ˚‧︵‿₊୨ Welcome to Fragrance Note Finder ୧₊‿︵‧ ˚ ₊⊹")
     print("========================================================")
     
-    while True:
+    while running:
         print("\n┌─────────── ⋆⋅☆⋅⋆ ───────────┐")
         print("  Menu:")
         print("  1. Search for desired notes")
