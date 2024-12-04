@@ -17,8 +17,7 @@ def load_csv_file(file_path):
     return perfume_data
 
 
-perfumeData = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
-print(perfumeData)
+
 
 #
 # # # Get basic information
