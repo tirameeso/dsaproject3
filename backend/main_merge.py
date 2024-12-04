@@ -31,7 +31,7 @@ def main():
 
     print(f"{len(searchResults)} Fragrances Found:")
     for fragrances in searchResults:
-        print(f"{perfume[1]} by {perfume[0]} with Notes: {','.join(fragrances[2])}")
+        print(f"{fragrances[1]} by {fragrances[0]} with Notes: {','.join(fragrances[2])}")
 
 
 if __name__ == "__main__":
