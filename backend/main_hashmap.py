@@ -7,6 +7,7 @@ def load_csv_file(file_path):
     data["notes"] = data["notes"].str.split(",")
     perfume_data = data[["brand", "perfume", "notes"]].values.tolist()
     return perfume_data
+
 def searchEng(hash_table, notes):
     """
     Search for perfumes that match ALL the given notes in the hash table.
