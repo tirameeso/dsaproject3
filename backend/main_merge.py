@@ -2,24 +2,38 @@
 from backend import load_csv_file
 from mergesort import mergeSort
 
-'''
-file_path = "maxai-excel-to-csv-converted.csv"
-dataSet = load_csv_file(file_path)
-mergeSort(dataSet, 1)
-
 def searchEng(frag, notes):
     fragList = []
-    for i in frag:
-        if notes.lower() in [j.lower() for j in i[2]]:
-            fragList.append(i)
+    for f in frag:
+        found = False
+        for n in frag[2]:
+            for note in notes:
+
+                if note in n.lower():
+                   found = True
+                   break
+
+            if found:
+               fragList.append[f]
+               break
+
     return fragList
 
-searchInput = input("Please enter a note to find a fragrance!").strip()
-searchResults = searchEng(dataSet, searchInput)
+def main():
+    dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
 
-if searchResults:
-    print(f"Fragrance(s) featuring notes of '{searchInput}':")
-    for s in searchResults:
-        print(f"Brand: {s[0]}, Fragrance: {s[1]}, All Notes: {','.join(searchResults[2])}")
-    else:
-        print(f"There are no perfumes found featuring this note.") '''
+    dataCopy = dataSet.copy()
+    mergeSort(dataCopy, 1)
+
+    searchInput = input("Please enter desired notes to find a fragrance:")
+    searchNotes = [note.strip().lower() for note in searchInput.split(',')]
+    searchResults = searchEng(dataCopy, searchNotes)
+
+    print(f"{len(searchResults)} Fragrances Found:")
+    for fragrances in searchResults:
+        print(f"{perfume[1]} by {perfume[0]} with Notes: {','.join(fragrances[2])}")
+
+
+if __name__ == "__main__":
+    main()
+
