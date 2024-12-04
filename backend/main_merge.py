@@ -58,34 +58,33 @@
 #     main()
 #
 # the main file we'll be using for merge sort
+
+# Importing necessary modules
 from dataTest import load_csv_file
 from mergesort import mergeSort
 
-def searchEng(frag, notes):
-    # List to hold all perfumes that match ALL notes
-    allNotes = []
 
-    # Dictionary to hold fragrances for individual notes
-    noteResults = {note: [] for note in notes}
+def searchEng(frag, notes):
+    """
+    Search for perfumes that match ALL the given notes.
+
+    Args:
+    frag (list): The list of all perfumes.
+    notes (list): The list of notes to search for.
+
+    Returns:
+    list: A list of perfumes that match all the notes.
+    """
+    matchingPerfumes = []
 
     for f in frag:
-        # Track which notes this fragrance matches
-        matchingNotes = set()
+        perfumeNotes = [n.lower() for n in f[2]]  # Convert notes to lowercase
+        # Check if all search notes are in the perfume's notes
+        if all(note in perfumeNotes for note in notes):
+            matchingPerfumes.append(f)
 
-        for n in f[2]:  # Iterate over the fragrance's notes
-            for note in notes:
-                if note in n.lower():
-                    matchingNotes.add(note)
+    return matchingPerfumes
 
-        # If the fragrance matches all notes, add it to `allNotes`
-        if len(matchingNotes) == len(notes):
-            allNotes.append(f)
-
-        # Add the fragrance to the dictionary for each matched note
-        for matchedNote in matchingNotes:
-            noteResults[matchedNote].append(f)
-
-    return allNotes, noteResults
 
 def main():
     # Load dataset
@@ -99,21 +98,15 @@ def main():
     searchInput = input("Please enter desired notes to find a fragrance (comma-separated): ")
     searchNotes = [note.strip().lower() for note in searchInput.split(',')]
 
-    # Search for fragrances matching the notes
-    allNotes, noteResults = searchEng(dataCopy, searchNotes)
+    # Get matching perfumes
+    matchingPerfumes = searchEng(dataCopy, searchNotes)
 
-    # Print perfumes matching ALL notes
-    print(f"\n{len(allNotes)} Fragrances Found with ALL notes:")
-    for fragrances in allNotes:
-        flattened_notes = [item for sublist in fragrances[2] for item in (sublist if isinstance(sublist, list) else [sublist])]
-        print(f"{fragrances[1]} by {fragrances[0]} with Notes: {', '.join(flattened_notes)}")
+    # Display results
+    print(f"\n{len(matchingPerfumes)} Fragrances Found matching ALL notes ({', '.join(searchNotes)}):")
+    for fragrances in matchingPerfumes:
+        print(f"{fragrances[1]} by {fragrances[0]} with Notes: {', '.join(fragrances[2])}")
 
-    # Print perfumes matching individual notes
-    for note, perfumes in noteResults.items():
-        print(f"\n{len(perfumes)} Fragrances Found with the note '{note}':")
-        for fragrances in perfumes:
-            flattened_notes = [item for sublist in fragrances[2] for item in (sublist if isinstance(sublist, list) else [sublist])]
-            print(f"{fragrances[1]} by {fragrances[0]} with Notes: {', '.join(flattened_notes)}")
 
 if __name__ == "__main__":
     main()
+
