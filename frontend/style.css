@@ -1,28 +1,123 @@
+/* General Styles */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    background-color: bisque;
-    padding: 50px;
-    color: hotpink;
-    line-height: 1.6;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
 }
+
+/* Container Styling */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Keep footer fixed at the bottom */
+    align-items: center; /* Center all items horizontally */
+    height: 100vh; /* Full viewport height */
+    padding: 0 1rem;
+}
+
+/* Title Styling */
 header {
-    background: floralwhite;
-    padding: 1rem 0;
+    width: 100%;
     text-align: center;
+    position: fixed; /* Fix title at the top */
+    top: 0;
+    background-color: #f9f9f9; /* Match background */
+    z-index: 10; /* Keep above other elements */
+    padding: 1rem 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for separation */
 }
-nav ul {
+
+header h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Search Bar Styling */
+.search-bar {
+    width: 100%;
+    max-width: 600px;
+    margin-top: 5rem; /* Space from the title */
+    margin-bottom: 0.5rem; /* Reduce space between search bar and results */
+}
+
+/* Results Container */
+.results-container {
+    width: 100%;
+    max-width: 600px; /* Keep consistent with the search bar */
+    height: 300px; /* Fixed height for the results box */
+    overflow-y: scroll; /* Always show the scroll bar */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0.5rem;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    margin-top: 5rem; /* Reduce the gap above the results container */
+    margin-bottom: 15rem; /* Space from footer (if necessary) */
+    margin-left: auto; /* Center horizontally */
+    margin-right: auto;
+}
+
+/* Results List */
+.results-container ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
-nav ul li {
-    display: inline;
-    margin: 0 10px;
+
+.results-container li {
+    text-align: left; /* Align results text to the left */
+    padding: 0.5rem;
+    border-bottom: 1px solid #eaeaea;
 }
-nav ul li a {
+
+.results-container li:last-child {
+    border-bottom: none;
+}
+
+/* Footer Links */
+footer {
+    width: 100%;
+    position: fixed; /* Fix footer at the bottom */
+    bottom: 0;
+    background-color: #f9f9f9; /* Match the background color */
+    padding: 1rem 0;
+    text-align: center;
+    display: flex;
+    justify-content: space-around; /* Space out the links */
+    z-index: 10;
+}
+
+footer a {
     text-decoration: none;
-    color: crimson;
+    color: #007bff;
+    font-size: 0.9rem;
 }
-form {
-    margin-top: 1rem;
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .results-container {
+        max-width: 90%; /* Adjust width for smaller screens */
+    }
+
+    .search-bar {
+        max-width: 90%;
+    }
+
+    footer {
+        flex-direction: column; /* Stack footer links vertically on small screens */
+    }
 }

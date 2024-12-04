@@ -3,59 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Find your perfect fragrance based on notes and ratings.">
-    <title>Fragrance Finder</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <title>Fragrance Note Finder</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>welcome to fragrance finder</h1>
-        <nav>
-            <ul>
-                <li><a href="#search">search fragrances</a></li>
-                <li><a href="#quiz">take our quiz</a></li>
-                <li><a href="#about">about</a></li>
+    <div class="container">
+        <!-- Title -->
+        <header>
+            <h1>fragrance note finder</h1>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="search-input" placeholder="search for the fragrance notes you like...">
+        </div>
+
+        <!-- Scrollable Results Section -->
+        <div class="results-container">
+            <ul id="results-list">
+                <!-- Dynamic results will appear here -->
             </ul>
-        </nav>
-    </header>
-    <main>
-        <!-- Placeholder for the search functionality -->
-        <section id="search">
-            <h2>search for a fragrance</h2>
-            <form id="search-form">
-                <input type="text" id="search-input" placeholder="Enter name, notes, or rating">
-                <button type="submit">Search</button>
-            </form>
-        </section>
+        </div>
 
-        <!-- Placeholder for the quiz functionality -->
-        <section id="quiz">
-            <h2>find your perfect scent</h2>
-            <p>Take a quick quiz to discover fragrances you'll love!</p>
-            <form id="quiz-form">
-                <label for="question1-floral">
-                <input type="radio" name="scent" value="floral" id="question1-floral"> Floral
-            </label>
-                <label for="question1-woody">
-                <input type="radio" name="scent" value="woody" id="question1-woody"> Woody
-            </label>
-    <button type="submit">get recommendations!</button>
-</form>
+        <!-- Footer Links -->
+        <footer>
+            <a href="#all-perfumes">all perfumes</a>
+            <a href="#all-notes">all notes</a>
+            <a href="#all-brands">all brands</a>
+            <a href="#dataset">link to dataset</a>
+        </footer>
+    </div>
 
-        </section>
-
-        <!-- Placeholder for results -->
-        <section id="results">
-            <h2>search results</h2>
-            <div id="results-container">
-                <!-- Dynamically populated with JavaScript -->
-            </div>
-        </section>
-    </main>
-    <footer>
-        <p>© 2024 Fragrance Finder. All rights reserved.</p>
-        <p> Created by Angely Gomez, Nicole Fong, and Rhythm Kumar. </p>
-    </footer>
-    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
