@@ -4,7 +4,7 @@ import pandas as pd
 import time
 
 def load_csv_file(file_path):
-    data = pd.read_csv("maxai-excel-to-csv-converted.csv")
+    data = pd.read_csv("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
     # dropping data that doesn't have value (3 perfume names not included)
     data.dropna(subset=["perfume"], inplace=True)
     data["notes"] = data["notes"].str.split(", ")
@@ -44,7 +44,7 @@ def searchEng(frag, notes):
 
 def main():
     # Load dataset
-    dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
+    dataSet = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
     dataCopy = dataSet.copy()
     running = True
 
