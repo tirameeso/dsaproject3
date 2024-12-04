@@ -37,7 +37,7 @@ def main():
     # Load dataset
     dataSet = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
     dataCopy = dataSet.copy()
-    running = True;
+    running = True
     initialInput = input("Welcome to Fragrance Note Finder! Please enter 'c' to continue or 'x' to exit the program.")
     while True:
         if initialInput == "c":
