@@ -1,12 +1,12 @@
 # the main file we'll be using for merge sort
-from backend import load_csv_file
+from dataTest import load_csv_file
 from mergesort import mergeSort
 
 def searchEng(frag, notes):
     fragList = []
     for f in frag:
         found = False
-        for n in frag[2]:
+        for n in f[2]:
             for note in notes:
 
                 if note in n.lower():
@@ -14,7 +14,7 @@ def searchEng(frag, notes):
                    break
 
             if found:
-               fragList.append[f]
+               fragList.append(f)
                break
 
     return fragList
@@ -31,7 +31,7 @@ def main():
 
     print(f"{len(searchResults)} Fragrances Found:")
     for fragrances in searchResults:
-        print(f"{fragrances[1]} by {fragrances[0]} with Notes: {','.join(fragrances[2])}")
+        print(f"{fragrances[1]} by {fragrances[0]} with Notes: {', '.join(fragrances[2])}")
 
 
 if __name__ == "__main__":
