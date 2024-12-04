@@ -1,9 +1,10 @@
 from mergesort import mergeSort
+from hashtable import *
 import pandas as pd
 import time
 
 def load_csv_file(file_path):
-    data = pd.read_csv("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
+    data = pd.read_csv("maxai-excel-to-csv-converted.csv")
     # dropping data that doesn't have value (3 perfume names not included)
     data.dropna(subset=["perfume"], inplace=True)
     data["notes"] = data["notes"].str.split(", ")
@@ -12,37 +13,56 @@ def load_csv_file(file_path):
     # for testing whether notes are split up accurately
     return perfume_data
 
+def notesList(frag):
+    notes = set()
+    for f in frag:
+        for n in f[2]:
+            notes.add(n.lower())
+    notesList = list(notes)
+    notesList.sort()
+    return notesList
+
 def searchEng(frag, notes):
     """
     Search for perfumes that match ALL the given notes.
 
     Args:
-    frag (list): The list of all perfumes.
-    notes (list): The list of notes to search for.
+    frag (list): list of all perfumes
+    notes (list): list of notes to search for
 
     Returns:
     list: A list of perfumes that match all the notes.
     """
     matchingPerfumes = []
-
     for f in frag:
         perfumeNotes = [n.lower() for n in f[2]]  # Convert notes to lowercase
         # Check if all search notes are in the perfume's notes
         if all(note in perfumeNotes for note in notes):
             matchingPerfumes.append(f)
-
     return matchingPerfumes
 
 
 def main():
     # Load dataset
-    dataSet = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
+    dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
     dataCopy = dataSet.copy()
     running = True
-    initialInput = input("Welcome to Fragrance Note Finder! Please enter 'c' to continue or 'x' to exit the program.")
-    while True:
-        if initialInput == "c":
-                DSAoptionInput = input("Do you want to use a hash table or merge sort to sort the data for this query? Enter 'h' or 'm'.")
+
+    print("========================================================")
+    print("⊹₊ ˚‧︵‿₊୨ Welcome to Fragrance Note Finder ୧₊‿︵‧ ˚ ₊⊹")
+    print("========================================================")
+    
+    while running:
+        print("\n┌─────────── ⋆⋅☆⋅⋆ ───────────┐")
+        print("  Menu:")
+        print("  1. Search for desired notes")
+        print("  2. Exit")
+        print("└─────────── ⋆⋅☆⋅⋆ ───────────┘")
+        initialInput = input("Please enter an option from the menu above! (1 or 2):\n")
+
+        if initialInput == "1":
+                DSAoptionInput = input("Do you want to use a hash table or merge sort to sort the data for this query? Enter 'h' or 'm'.\n" )
+                
                 if DSAoptionInput == "m":
                     # Sort the dataset by the second column (index 1)
                     startTime = time.time()
@@ -71,15 +91,14 @@ def main():
                     # compute time it took
                     totalTime = endTime - startTime
                     print(f"Merge sort completed in {totalTime:.6f} seconds.")
-
                 elif DSAoptionInput ==  "h":
                     # implementation for hash table search
                     print("work in progress")
-
                 else:
                     print("Not a valid input. Please start over.")
                     continue
-        elif initialInput == "x":
+                
+        elif initialInput == "2":
             print("Thank you for using Fragrance Note Finder! Goodbye.")
             running = False
             break
