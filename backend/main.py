@@ -23,16 +23,6 @@ def notesList(frag):
     return notesList
 
 def searchEng(frag, notes):
-    """
-    Search for perfumes that match ALL the given notes.
-
-    Args:
-    frag (list): list of all perfumes
-    notes (list): list of notes to search for
-
-    Returns:
-    list: A list of perfumes that match all the notes.
-    """
     matchingPerfumes = []
     for f in frag:
         perfumeNotes = [n.lower() for n in f[2]]  # Convert notes to lowercase
@@ -65,9 +55,9 @@ def main():
                 
                 if DSAoptionInput == "m":
                     # Sort the dataset by the second column (index 1)
-                    startTime = time.time()
+                    startTimeMerge = time.perf_counter_ns()
                     mergeSort(dataCopy, 1)
-                    endTime = time.time()
+                    endTimeMerge = time.perf_counter_ns()
 
                     # Get search input
                     searchInput = input("Please enter desired notes to find a fragrance (comma-separated): ")
@@ -78,10 +68,11 @@ def main():
 
                     if not searchNotes:
                         print("Error: No notes entered. Please enter at least one note.")
-                        return
+                        continue
 
                     if not matchingPerfumes:
                         print(f"No fragrances found matching ALL notes ({', '.join(searchNotes)}).")
+                        continue
 
                     # Display results
                     print(f"\n{len(matchingPerfumes)} Fragrances Found matching ALL notes ({', '.join(searchNotes)}):")
@@ -89,11 +80,42 @@ def main():
                         print(f"{fragrances[1]} by {fragrances[0]} with notes of: {', '.join(fragrances[2])}")
 
                     # compute time it took
-                    totalTime = endTime - startTime
-                    print(f"Merge sort completed in {totalTime:.6f} seconds.")
+                    totalTimeMerge = endTimeMerge - startTimeMerge
+                    print(f"Merge sort completed in {totalTimeMerge:.6f} seconds.")
+
                 elif DSAoptionInput ==  "h":
-                    # implementation for hash table search
-                    print("work in progress")
+                    # create and populate the hash table
+                    startTimeHash = time.perf_counter_ns()
+                    table_size = 100  # Adjust size as needed
+                    hash_table = HashTable(table_size)
+                    for brand, perfume, notes in dataCopy:
+                        hash_table.insert(perfume, (brand, perfume, notes))
+                    endTimeHash = time.perf_counter_ns()
+                        # Get search input
+                    searchInput = input("Please enter desired notes to find a fragrance (comma-separated): ")
+                    searchNotes = [note.strip().lower() for note in searchInput.split(',')]
+
+                    # Get matching perfumes
+                    matchingPerfumes = searchEng(dataCopy, searchNotes)
+
+                    if not searchNotes:
+                        print("Error: No notes entered. Please enter at least one note.")
+                        continue
+
+                    if not matchingPerfumes:
+                        print(f"No fragrances found matching ALL notes ({', '.join(searchNotes)}).")
+                        continue
+
+                    # Display results
+                    print(
+                        f"\n{len(matchingPerfumes)} Fragrances Found matching ALL notes ({', '.join(searchNotes)}):")
+                    for fragrances in matchingPerfumes:
+                        print(f"{fragrances[1]} by {fragrances[0]} with notes of: {', '.join(fragrances[2])}")
+
+                    # compute time it took; come to this in a second
+                    totalTimeHash = endTimeHash - startTimeHash
+                    print(f"Hash table completed in {totalTimeHash:.6f} nanoseconds.")
+
                 else:
                     print("Not a valid input. Please start over.")
                     continue
@@ -102,73 +124,6 @@ def main():
             print("Thank you for using Fragrance Note Finder! Goodbye.")
             running = False
             break
-
-if __name__ == "__main__":
-    main()
-
-
-
-from hashtable import HashTable
-import pandas as pd
-
-def load_csv_file(file_path):
-    data = pd.read.csv(file_path)
-    data.dropna(subset=["perfume"], inplace=True)
-    data["notes"] = data["notes"].str.split(",")
-    perfume_data = data[["brand", "perfume", "notes"]].values.tolist()
-    return perfume_data
-def searchEng(hash_table, notes):
-    """
-    Search for perfumes that match ALL the given notes in the hash table.
-
-    Args:
-    hash_table (HashTable): The hash table containing perfumes.
-    notes (list): The list of notes to search for.
-
-    Returns:
-    list: A list of perfumes that match all the notes.
-    """
-    matchingPerfumes = []
-
-    for bucket in hash_table.table:
-        if bucket:
-            for brand, perfume, perfume_notes in bucket:
-                # Convert notes to lowercase for case-insensitive comparison
-                perfume_notes_lower = [note.lower() for note in perfume_notes]
-                if all(note in perfume_notes_lower for note in notes):
-                    matchingPerfumes.append((brand, perfume, perfume_notes))
-
-    return matchingPerfumes
-
-def main():
-    # load dataset
-    file_path = "/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv"
-    perfume_data = load_csv_file(file_path)
-
-    # create and populate the hash table
-    table_size = 100  # Adjust size as needed
-    hash_table = HashTable(table_size)
-    for brand, perfume, notes in perfume_data:
-        hash_table.insert(perfume, (brand, perfume, notes))
-
-    # get search input
-    search_input = input("Please enter desired notes to find a fragrance (comma-separated): ")
-    search_notes = [note.strip().lower() for note in search_input.split(',')]
-
-    if not search_notes:
-        print("Error: No notes entered. Please enter at least one note.")
-        return
-
-    # search for matching perfumes
-    matching_perfumes = searchEng(hash_table, search_notes)
-
-    # display results
-    if not matching_perfumes:
-        print(f"No fragrances found matching ALL notes ({', '.join(search_notes)}).")
-    else:
-        print(f"\n{len(matching_perfumes)} Fragrances Found matching ALL notes ({', '.join(search_notes)}):")
-        for brand, perfume, notes in matching_perfumes:
-            print(f"{perfume} by {brand} with notes of: {', '.join(notes)}")
 
 if __name__ == "__main__":
     main()
