@@ -7,7 +7,7 @@ import pandas as pd
 # im not sure if this function is going to work, but let's not delete it yet. the variable "data" becomes unreachable
 
 def load_csv_file(file_path):
-    data = pd.read_csv("maxai-excel-to-csv-converted.csv")
+    data = pd.read_csv("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
     # dropping data that doesn't have value (3 perfume names not included)
     data.dropna(subset=["perfume"], inplace=True)
     data["notes"] = data["notes"].str.split(", ")
@@ -17,8 +17,7 @@ def load_csv_file(file_path):
     return perfume_data
 
 
-perfumeData = load_csv_file("maxai-excel-to-csv-converted.csv")
-print(perfumeData)
+
 
 #
 # # # Get basic information
