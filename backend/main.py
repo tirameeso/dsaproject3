@@ -13,6 +13,15 @@ def load_csv_file(file_path):
     # for testing whether notes are split up accurately
     return perfume_data
 
+def notesList(frag):
+    notes = set()
+    for f in frag:
+        for n in f[2]:
+            notes.add(n.lower())
+    notesList = list(notes)
+    notesList.sort()
+    return notesList
+
 def searchEng(frag, notes):
     """
     Search for perfumes that match ALL the given notes.
@@ -38,10 +47,22 @@ def main():
     dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
     dataCopy = dataSet.copy()
     running = True
-    initialInput = input("Welcome to Fragrance Note Finder! Please enter 'c' to continue or 'x' to exit the program.")
+
+    print("========================================================")
+    print("⊹₊ ˚‧︵‿₊୨ Welcome to Fragrance Note Finder ୧₊‿︵‧ ˚ ₊⊹")
+    print("========================================================")
+    
     while True:
-        if initialInput == "c":
-                DSAoptionInput = input("Do you want to use a hash table or merge sort to sort the data for this query? Enter 'h' or 'm'.")
+        print("\n┌─────────── ⋆⋅☆⋅⋆ ───────────┐")
+        print("  Menu:")
+        print("  1. Search for desired notes")
+        print("  2. Exit")
+        print("└─────────── ⋆⋅☆⋅⋆ ───────────┘")
+        initialInput = input("Please enter an option from the menu above! (1 or 2):\n")
+
+        if initialInput == "1":
+                DSAoptionInput = input("Do you want to use a hash table or merge sort to sort the data for this query? Enter 'h' or 'm'.\n" )
+                
                 if DSAoptionInput == "m":
                     # Sort the dataset by the second column (index 1)
                     startTime = time.time()
@@ -76,7 +97,8 @@ def main():
                 else:
                     print("Not a valid input. Please start over.")
                     continue
-        elif initialInput == "x":
+                
+        elif initialInput == "3":
             print("Thank you for using Fragrance Note Finder! Goodbye.")
             running = False
             break
