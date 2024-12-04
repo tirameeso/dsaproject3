@@ -20,7 +20,7 @@ def searchEng(frag, notes):
     return fragList
 
 def main():
-    dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
+    dataSet = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
 
     dataCopy = dataSet.copy()
     mergeSort(dataCopy, 1)
@@ -33,7 +33,7 @@ def main():
     for fragrances in searchResults:
         print(f"{fragrances[1]} by {fragrances[0]} with Notes: {', '.join(fragrances[2])}")
 
-
+# damn I forgot about this shit -angie
 if __name__ == "__main__":
     main()
 
