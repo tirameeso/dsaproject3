@@ -3,7 +3,6 @@ def mergeSort(frag, index):
     if len(frag) > 1:
         # finds the index for the middle of the list
         midLen = len(frag) // 2
-
         # based on midLen, the list is divided into a right side and left side
         right = frag[midLen:]
         mergeSort(right, index)
@@ -41,4 +40,3 @@ def mergeSort(frag, index):
             frag[n] = left[i]
             n = n + 1
             i = i + 1
-
