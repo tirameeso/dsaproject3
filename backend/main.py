@@ -88,10 +88,11 @@ def main():
                     startTimeHash = time.perf_counter_ns()
                     table_size = 100  # Adjust size as needed
                     hash_table = HashTable(table_size)
+
                     for brand, perfume, notes in dataCopy:
                         hash_table.insert(perfume, (brand, perfume, notes))
+
                     endTimeHash = time.perf_counter_ns()
-                        # Get search input
                     searchInput = input("Please enter desired notes to find a fragrance (comma-separated): ")
                     searchNotes = [note.strip().lower() for note in searchInput.split(',')]
 
@@ -106,7 +107,7 @@ def main():
                         print(f"No fragrances found matching ALL notes ({', '.join(searchNotes)}).")
                         continue
 
-                    # Display results
+                    # prints out results
                     print(
                         f"\n{len(matchingPerfumes)} Fragrances Found matching ALL notes ({', '.join(searchNotes)}):")
                     for fragrances in matchingPerfumes:
