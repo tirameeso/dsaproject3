@@ -13,15 +13,6 @@ def load_csv_file(file_path):
     # for testing whether notes are split up accurately
     return perfume_data
 
-def notesList(frag):
-    notes = set()
-    for f in frag:
-        for n in f[2]:
-            notes.add(n.lower())
-    notesList = list(notes)
-    notesList.sort()
-    return notesList
-
 def searchEng(frag, notes):
     matchingPerfumes = []
     for f in frag:
