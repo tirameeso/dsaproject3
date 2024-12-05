@@ -24,7 +24,7 @@ def searchEng(frag, notes):
 
 def main():
     # Load dataset
-    dataSet = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
+    dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
     dataCopy = dataSet.copy()
     running = True
 
