@@ -15,24 +15,30 @@ def load_csv_file(file_path):
 
 def searchEng(frag, notes):
     matchingPerfumes = []
+    # iterating through the different perfumes
     for f in frag:
+        # converts all of the letters to lowercase just in case 
         perfumeNotes = [n.lower() for n in f[2]]
+        # checks the entirity of the dataset for existing notes
         if all(note in perfumeNotes for note in notes):
             matchingPerfumes.append(f)
+
     return matchingPerfumes
 
 
 def main():
-    # Load dataset
+    # get the data set loaded
     dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
     dataCopy = dataSet.copy()
     running = True
 
+    # welcome screen
     print("========================================================")
     print("⊹₊ ˚‧︵‿₊୨ Welcome to Fragrance Note Finder ୧₊‿︵‧ ˚ ₊⊹")
     print("========================================================")
     
     while running:
+        # prints out menu
         print("\n┌─────────── ⋆⋅☆⋅⋆ ───────────┐")
         print("  Menu:")
         print("  1. Search for desired notes")
@@ -87,33 +93,38 @@ def main():
 
                     endTimeHash = time.perf_counter_ns()
                     searchInput = input("Please enter desired notes to find a fragrance (comma-separated): ")
+                    # organizes the notes and cleans up the list for each perfume 
                     searchNotes = [note.strip().lower() for note in searchInput.split(',')]
 
-                    # Get matching perfumes
+                    # finds perfumes with the desired nodes
                     matchingPerfumes = searchEng(dataCopy, searchNotes)
 
+                    # edge case for no input
                     if not searchNotes:
                         print("Error: No notes entered. Please enter at least one note.")
                         continue
-
+                    
+                    # edge case for note that is not in dataset
                     if not matchingPerfumes:
                         print(f"No fragrances found matching ALL notes ({', '.join(searchNotes)}).")
                         continue
 
-                    # prints out results
+                    # prints out perfumes that include desired notes
                     print(
                         f"\n{len(matchingPerfumes)} Fragrances Found matching ALL notes ({', '.join(searchNotes)}):")
                     for fragrances in matchingPerfumes:
                         print(f"{fragrances[1]} by {fragrances[0]} with notes of: {', '.join(fragrances[2])}")
 
-                    # compute time it took; come to this in a second
+                    # compute time it took in nanoseconds
                     totalTimeHash = endTimeHash - startTimeHash
                     print(f"Hash table completed in {totalTimeHash:.6f} nanoseconds.")
 
+                # edge case for if anything beside "h" or "m" is inserted
                 else:
                     print("Not a valid input. Please start over.")
                     continue
-                
+
+        # exits program
         elif initialInput == "2":
             print("Thank you for using Fragrance Note Finder! Goodbye.")
             running = False
