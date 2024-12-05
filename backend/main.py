@@ -4,7 +4,7 @@ import pandas as pd
 import time
 
 def load_csv_file(file_path):
-    data = pd.read_csv("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
+    data = pd.read_csv("maxai-excel-to-csv-converted.csv")
     # dropping data that doesn't have value (3 perfume names not included)
     data.dropna(subset=["perfume"], inplace=True)
     data["notes"] = data["notes"].str.split(", ")
@@ -16,16 +16,14 @@ def load_csv_file(file_path):
 def searchEng(frag, notes):
     matchingPerfumes = []
     for f in frag:
-        perfumeNotes = [n.lower() for n in f[2]]  # Convert notes to lowercase
-        # Check if all search notes are in the perfume's notes
+        perfumeNotes = [n.lower() for n in f[2]]
         if all(note in perfumeNotes for note in notes):
             matchingPerfumes.append(f)
     return matchingPerfumes
 
 
 def main():
-    # Load dataset
-    dataSet = load_csv_file("/Users/angielaptop/PycharmProjects/dsaproject3/maxai-excel-to-csv-converted.csv")
+    dataSet = load_csv_file("maxai-excel-to-csv-converted.csv")
     dataCopy = dataSet.copy()
     running = True
 
@@ -45,18 +43,21 @@ def main():
                 DSAoptionInput = input("Do you want to use a hash table or merge sort to sort the data for this query? Enter 'h' or 'm'.\n" )
                 
                 if DSAoptionInput == "m":
-                    # Sort the dataset by the second column (index 1)
+                    # begin recording time
                     startTimeMerge = time.perf_counter_ns()
                     mergeSort(dataCopy, 1)
                     endTimeMerge = time.perf_counter_ns()
 
-                    # Get search input
+                    # prompt for user input (notes)
                     searchInput = input("Please enter desired notes to find a fragrance (comma-separated): ")
+                    # put the user input into list
                     searchNotes = [note.strip().lower() for note in searchInput.split(',')]
 
-                    # Get matching perfumes
+                    # call search engine function
                     matchingPerfumes = searchEng(dataCopy, searchNotes)
 
+                    # edge cases: no notes entered OR note entered DNE
+                    # if triggered, reprompt menu (restart while loop)
                     if not searchNotes:
                         print("Error: No notes entered. Please enter at least one note.")
                         continue
@@ -65,19 +66,19 @@ def main():
                         print(f"No fragrances found matching ALL notes ({', '.join(searchNotes)}).")
                         continue
 
-                    # Display results
+                    # display results
                     print(f"\n{len(matchingPerfumes)} Fragrances Found matching ALL notes ({', '.join(searchNotes)}):")
                     for fragrances in matchingPerfumes:
                         print(f"{fragrances[1]} by {fragrances[0]} with notes of: {', '.join(fragrances[2])}")
 
-                    # compute time it took
+                    # compute time it took for the merge sort to sort data
                     totalTimeMerge = endTimeMerge - startTimeMerge
                     print(f"Merge sort completed in {totalTimeMerge:.6f} seconds.")
 
                 elif DSAoptionInput ==  "h":
                     # create and populate the hash table
                     startTimeHash = time.perf_counter_ns()
-                    table_size = 100  # Adjust size as needed
+                    table_size = 100
                     hash_table = HashTable(table_size)
                     for brand, perfume, notes in dataCopy:
                         hash_table.insert(perfume, (brand, perfume, notes))
